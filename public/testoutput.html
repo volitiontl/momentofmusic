@@ -1,0 +1,42 @@
+<html>
+<head>
+
+    <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+    <script src="../adobe/test.js"></script>
+    <script>
+        var canvas, stage, exportRoot;
+        var player;
+        var state=[];
+
+        function init() {
+            canvas = document.getElementById("canvas");
+            stage = new createjs.Stage(canvas);
+            stage.update();
+            createjs.Ticker.setFPS(lib.properties.fps);
+            createjs.Ticker.addEventListener("tick", stage);
+
+
+            state.push({id:129,thetype:"test",x:123,y:123})
+
+            setInterval(function(){output(state)},100)
+            output(state);
+
+
+
+
+        }
+    </script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+<canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
+
+<script src="./javascript/output.js"></script>
+<script>
+
+
+
+
+</script>
+</body>
+</html>

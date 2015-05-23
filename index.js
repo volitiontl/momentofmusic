@@ -15,31 +15,19 @@ module.exports=function(){
 
   app.get('/', function (req, res) {
     res.send('Hello World!');
-
   });
 
 
 
 
-  app.ws('/echo', function(ws, req) {
-    ws.on('message', function(msg) {
-      ws.send(""+temp.getstatus()+msg);
-    });
-    ws.on('close', function close() {
-      console.log('disconnected');
-    });
-
-  });
+  temp.setClient(app,expressWs);
 
 
-  var aWss = expressWs.getWss('/echo');
 
 
 
   setInterval(function () {
-    aWss.clients.forEach(function (client) {
-      client.send('hello');
-    });
+    temp.tellClient("hello hi");
   }, 500);
 
   var server = app.listen(3000, function () {

@@ -1,0 +1,24 @@
+{
+  "name": "momentofmusic",
+  "version": "1.0.0",
+  "description": "Create a music moment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://volitiontl@github.com/volitiontl/momentofmusic.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/volitiontl/momentofmusic/issues"
+  },
+  "homepage": "https://github.com/volitiontl/momentofmusic#readme",
+  "dependencies": {
+    "express": "^4.12.4",
+    "express-ws": "^0.2.6",
+    "ws": "^0.7.2"
+  }
+}

@@ -11,6 +11,7 @@ module.exports=function(){
   var expressWs = require('express-ws')(app);
 
   app.use('/static', express.static(__dirname + '/public'));
+  app.use('/adobe', express.static(__dirname + '/adobe'));
 
   app.get('/', function (req, res) {
     res.send('Hello World!');

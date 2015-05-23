@@ -1,0 +1,30 @@
+<html>
+<head>
+
+    hello
+</head>
+
+<body>
+<script src="javascript/input.js"></script>
+<script>
+    function check(){
+        if(gameinput.isKeyDown("left")){
+            console.log("left down")
+        }
+        if(gameinput.isKeyDown("right")){
+            console.log("right down")
+        }
+        if(gameinput.isKeyDown("up")){
+            console.log("up is down")
+        }
+        if(gameinput.isKeyDown("down")){
+            console.log("down is down")
+        }
+
+    }
+    setInterval(check,100)
+</script>
+
+</body>
+
+</html>

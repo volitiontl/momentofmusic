@@ -23,12 +23,13 @@ module.exports=function(){
   temp.setClient(app,expressWs);
 
 
-
-
-
-  setInterval(function () {
+  app.get('/tell',function(req,res){
+    console.log("telling")
     temp.tellClient("hello hi");
-  }, 500);
+    res.send("hi").status(200)
+  });
+
+
 
   var server = app.listen(3000, function () {
     var host = server.address().address;

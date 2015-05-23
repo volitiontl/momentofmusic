@@ -4,8 +4,8 @@
 
   var websocket,init=false;
   var m={};
-  m.init=function(onopen,onclose,onmessage,onerror) {
-    websocket = new WebSocket(wsUri);
+  m.init=function(url,onopen,onclose,onmessage,onerror) {
+    websocket = new WebSocket(url);
     websocket.onopen = onopen;
     websocket.onclose = onclose;
     websocket.onmessage = onmessage;

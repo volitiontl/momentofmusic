@@ -1,0 +1,48 @@
+<html>
+<head>
+    <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+    <script src="../adobe/test2logic.js"></script>
+    <script src="javascript/input.js"></script>
+    <script src="javascript/logic.js"></script>
+    <script>
+        var canvas, stage, exportRoot;
+        var player;
+
+        function init() {
+
+
+            canvas = document.getElementById("canvas");
+            stage = new createjs.Stage(canvas);
+            exportRoot = new lib.test2logic();
+            stage.addChild(exportRoot);
+            stage.update()
+            createjs.Ticker.setFPS(lib.properties.fps);
+            createjs.Ticker.addEventListener("tick", stage);
+
+
+
+            function check(){
+                event="";
+                if(gameinput.isKeyDown("up")){
+                    event="up"
+                }
+                if(gameinput.isKeyDown("down")){
+                    event="down"
+                }
+                logic(state,event)
+                exportRoot.children[0].y=state.player.y;
+            }
+            setInterval(check,100)
+
+
+        }
+    </script>
+</head>
+
+
+
+
+<body onload="init();" style="background-color:#D4D4D4">
+<canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>

@@ -3,12 +3,67 @@
 
 </head>
 <body>
-hello world
-<br>
-create song
-<br>
-list of songs
-<br>
+
+
+
+    <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+    <script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
+    <script src="http://code.createjs.com/movieclip-0.7.1.min.js"></script>
+    <script src="../adobe/composer.js"></script>
+    <script src="/javascript/lib.js"></script>
+
+    <script>
+        var canvas, stage, exportRoot;
+
+        function init() {
+            canvas = document.getElementById("canvas");
+            exportRoot = new lib.composer();
+
+            stage = new createjs.Stage(canvas);
+            stage.addChild(exportRoot);
+
+            window.current="happy"
+            exportRoot.children[20].gotoAndStop("happy")
+            stage.update();
+
+            createjs.Ticker.setFPS(lib.properties.fps);
+            createjs.Ticker.addEventListener("tick", stage);
+
+            exportRoot.children[20].on("click",function(){
+                var next="";
+                if (window.current=="happy"){
+                    next="angry";
+                    window.current="angry";
+                }
+                else if (window.current=="angry"){
+                    next="sad";
+                    window.current="sad"
+                }
+                else if (window.current=="sad"){
+                    next="happy";
+                    window.current="happy"
+                }
+                console.log(next,window.current)
+                this.gotoAndStop(next)
+            })
+
+            stage.on("stagemousedown", function(evt) {
+                if(evt.stageX>150){
+                    var temp=new lib.face();
+                    stage.addChild(temp);
+                    temp.x=evt.stageX;
+                    temp.y=evt.stageY;
+                    temp.gotoAndStop(window.current)
+                    stage.update();
+                }
+            })
+        }
+
+    </script>
+
+
+<body onload="init();" style="background-color:#D4D4D4">
+<canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
 
 </body>
 </html>

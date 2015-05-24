@@ -14,7 +14,7 @@ module.exports=function(){
   app.use('/adobe', express.static(__dirname + '/adobe'));
 
   app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.sendFile(__dirname + '/public/index.html')
   });
 
 

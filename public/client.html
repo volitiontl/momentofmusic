@@ -6,7 +6,7 @@
 
     <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
     <script src="../adobe/test.js"></script>
-    <script src="javascript/websocket.js"></script>
+    <script src="javascript/lib.js"></script>
 
     <script>
         var canvas, stage, exportRoot;
@@ -14,8 +14,6 @@
 
         function init() {
             canvas = document.getElementById("canvas");
-//            exportRoot = new lib.test();
-
             stage = new createjs.Stage(canvas);
             player= new lib.test();
             stage.addChild(player);
@@ -31,6 +29,7 @@
 <canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
 
 <script>
+    var ws=initWs();
     var wsUri = "ws://localhost:3000/echo";
     ws.init(wsUri,function(){},function(){},function(evt){player.x+=50},function(){})
 

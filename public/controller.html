@@ -2,33 +2,67 @@
 <head>
 
 </head>
-<body>
-<button id="change">hello</button>
-
-
-<div style="border: 1px solid black; width:50%; height:50%">
-    <button id="song">start song</button>
-    <button id="change">change moods</button>
-    <button id="stuff">sync beats</button>
-</div>
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.9.0/lodash.min.js"></script>
-
+<script src="javascript/lib.js"></script>
+<script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
+<script src="../adobe/controller.js"></script>
 
 
 <script>
-//    var wsUri = "ws://localhost:3000/echo";
-//    ws.init(wsUri,_.noop,_.noop,_.noop,_.noop);
+    var canvas, stage, exportRoot;
 
-    document.getElementById("change").addEventListener("click",function(evt){
-        $.ajax({
-            url: "http://localhost:3000/tell",
-            context: document.body
+    function init() {
+        canvas = document.getElementById("canvas");
+        exportRoot = new lib.controller();
+
+        stage = new createjs.Stage(canvas);
+        stage.addChild(exportRoot);
+        stage.update();
+
+        createjs.Ticker.setFPS(lib.properties.fps);
+        createjs.Ticker.addEventListener("tick", stage);
+
+
+        var state = [];
+        var itt = 0;
+        stage.on("stagemousedown", function (evt) {
+            state.push({id: itt++, thetype: "beat", x: 200, y: 0})
+            $.ajax({
+                            url: "http://localhost:3000/tell",
+                            context: document.body
+                        })
+
+
         })
-    })
+
+
+        var output = initGameOutput();
+
+        function drop() {
+            for (var i = 0; i < state.length; i++) {
+                state[i].y += 10;
+            }
+            output(state)
+        }
+
+        setInterval(drop, 50)
+
+    }
+</script>
+
+<body onload="init();" style="background-color:#D4D4D4">
+<canvas id="canvas" width="400" height="300" style="background-color:#FFFFFF"></canvas>
+
+<script>
+    //    var wsUri = "ws://localhost:3000/echo";
+    //    ws.init(wsUri,_.noop,_.noop,_.noop,_.noop);
+
+    //    document.getElementById("change").addEventListener("click",function(evt){
+    //        $.ajax({
+    //            url: "http://localhost:3000/tell",
+    //            context: document.body
+    //        })
+    //    })
 </script>
 
 </body>

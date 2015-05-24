@@ -5,18 +5,19 @@
     <title>test</title>
 
     <script src="http://code.createjs.com/easeljs-0.7.1.min.js"></script>
-    <script src="../adobe/test.js"></script>
+    <script src="../adobe/game1.js"></script>
     <script src="javascript/lib.js"></script>
 
     <script>
         var canvas, stage, exportRoot;
         var player;
 
+
         function init() {
             canvas = document.getElementById("canvas");
             stage = new createjs.Stage(canvas);
-            player= new lib.test();
-            stage.addChild(player);
+//            player= new lib.beat();
+//            stage.addChild(player);
             stage.update();
 
             createjs.Ticker.setFPS(lib.properties.fps);
@@ -29,9 +30,27 @@
 <canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
 
 <script>
+
+    var state = [];
+    var itt = 0;
+    var output=initGameOutput();
+    function drop(){
+        for (var i = 0; i < state.length; i++) {
+            state[i].y += 10;
+        }
+
+        output(state);
+    }
+    function dropit(){
+        state.push({id: itt++, thetype: "beat", x: 200, y: 0})
+        console.log("hihi")
+
+    }
+    setInterval(drop,100)
+
     var ws=initWs();
     var wsUri = "ws://localhost:3000/echo";
-    ws.init(wsUri,function(){},function(){},function(evt){player.x+=50},function(){})
+    ws.init(wsUri,function(){},function(){},dropit,function(){})
 
 </script>
 </body>

@@ -1,7 +1,6 @@
 var cached = {};
 var cached2 = {};
 
-
 function output(state) {
   state.forEach(function (obj) {
     var temp = {};
@@ -25,8 +24,6 @@ function output(state) {
       stage.removeChild(cached[xxx].obj)
     }
   }
-
-
   cached = cached2;
   cached2 = {};
 }
